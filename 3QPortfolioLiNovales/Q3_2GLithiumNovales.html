@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Q3 2nd Graded Exercise">
+    <meta name="keywords" content="Club Application Form">
+    <meta name="author" content="Emma Novales">
+    <title>HTML Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="icon" href="/SY25-26PortfolioLiNovales/2QPortfolioLiNovales/assets/catmeme1.webp" sizes="32x32" type="image/png">
+    <script src="script.js" defer></script>
+  </head>
+</html>
+
+<body>
+    <h1 class="title">Club Application Form</h1>
+    <form id="dForm" action="register.html" method="get">
+        <fieldset>
+            <label>Student ID : 
+                <input type="numeric" name="studentid" id="studentid" required/>
+            </label></br></br>
+            <label>Full Name : 
+                <input type="text" name="fullname" id="fullname" required/>
+            </label></br></br>
+            <label>Birthday : 
+                <input type="date" name="birthday" id="birthday" required/>
+            </label></br></br>
+            <label>Email Address : 
+                <input type="email" name="uemail" id="uemail" required/>
+            </label></br></br>
+        </fieldset>
+        <fieldset>
+            <label>Mobile Number : 
+                <input type="text" name="mobile" id="mobile" required/>
+            </label></br></br>
+            <label>Grade Level : 
+                <select name="glevel" id="glevel" required>
+                    <option value="gradeseven">Grade 7</option>
+                    <option value="gradeeight">Grade 8</option>
+                    <option value="gradenine">Grade 9</option>
+                    <option value="gradeten">Grade 10</option>
+                    <option value="gradeeleven">Grade 11</option>
+                    <option value="gradetwelve">Grade 12</option>
+                </select>
+            </label></br></br>
+            <label>Intern/Extern : 
+                <input type="radio" name="internorextern" value="Intern" required/> Intern
+                <input type="radio" name="internorextern" value="Extern" required/> Extern
+            </label></br></br>
+            <label>Your Club of Choice : 
+                <select name="uclub" id="uclub" required>
+                    <option value="music">Music</option>
+                    <option value="drama">Drama</option>
+                    <option value="sports">Sports</option>
+                    <option value="math">Math</option>
+                    <option value="debate">Debate</option>
+                </select>
+            </label></br></br>
+        </fieldset>
+    </form>
