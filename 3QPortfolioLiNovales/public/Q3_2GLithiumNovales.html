@@ -126,21 +126,11 @@
       <textarea name="reason" rows="4" cols="40" required></textarea>
     </label><br><br>
         <button onclick="submit">Submit</button>
+            <script>
+                function submit(){
+                alert("Click");
+                }
+            </script>
         <button type="reset">Reset</button>
 
     </form>
-    <p id="confirmation"></p>
-    <script>
-        function submit() {
-            var txt
-            if (confirm("Are you sure of your answers?")) {
-                txt = "Form Submitted";
-            }
-            else {
-                txt = "Form Cancelled";
-            }
-            document.getElementById("confirmation").innerHTML = txt;
-        }
-    </script>
-    </body>
-    </html>
