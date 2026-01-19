@@ -15,7 +15,7 @@
         font-family: Arial, sans-serif;
         background-color: #ffdcdc;
         padding: 20px;
-        background-image: url('image.png');
+        background-image: url('pinkbg.png');
     }
     .form-container {
         background-color: #fefee6;
@@ -125,8 +125,22 @@
             <br></br>
       <textarea name="reason" rows="4" cols="40" required></textarea>
     </label><br><br>
-        <button type="submit">Submit</button>
+        <button onclick="submit">Submit</button>
         <button type="reset">Reset</button>
-</div>
 
     </form>
+    <p id="confirmation"></p>
+    <script>
+        function submit() {
+            var txt
+            if (confirm("Are you sure of your answers?")) {
+                txt = "Form Submitted";
+            }
+            else {
+                txt = "Form Cancelled";
+            }
+            document.getElementById("confirmation").innerHTML = txt;
+        }
+    </script>
+    </body>
+    </html>
