@@ -69,9 +69,11 @@
             </thead>
             <tbody></tbody>
         </table>
+        <p id="noInfo" style="display:none; text-align:center;">No signups for this club.</p>
         <br>
         <button type="button" onclick="location.href='Q3_2GLithiumNovales.html'">Back to Form</button>
     </div>
+
 <script>
     let signups = JSON.parse(localStorage.getItem('signups')) || [];
     const tableBody = document.querySelector('#signupsTable tbody');
@@ -107,13 +109,12 @@
             }
         }
         totalSignupsElem.textContent = count;
+        document.getElementById('noInfo').style.display = count === 0 ? 'block' : 'none';
+      
     }
     renderTable();
-    if (signups.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No Sign-Ups for the club.</td></tr>';
-    }
+    
 </script>
 </body>
-
 
     </html>
