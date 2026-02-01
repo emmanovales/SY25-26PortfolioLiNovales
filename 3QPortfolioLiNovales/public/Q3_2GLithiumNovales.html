@@ -15,7 +15,7 @@
         font-family: Arial, sans-serif;
         background-color: #ffdcdc;
         padding: 20px;
-        background-image: url('image.png');
+        background-image: url('pinkbg.png');
     }
     .form-container {
         background-color: #fefee6;
@@ -133,9 +133,13 @@
             <br></br>
       <textarea name="reason" rows="4" cols="40" required onblur="checkBlur(this)"></textarea>
     </label><br><br>
-        <button type="submit">Submit</button>
+        <button onclick="submit">Submit</button>
+            <script>
+                function submit(){
+                alert("Click");
+                }
+            </script>
         <button type="reset">Reset</button>
-</div>
 
     </form>
 
