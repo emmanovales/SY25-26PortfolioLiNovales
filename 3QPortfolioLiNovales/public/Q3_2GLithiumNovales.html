@@ -81,7 +81,7 @@
 <body>
     <div class="form-container">
     <h1 class="title">Club Application Form</h1>
-    <form id="dForm" action="register.html" method="get">
+    <form id="dForm" method="get">
         <fieldset class="rounded">
         </br>
             <label>Student ID : 
@@ -133,7 +133,7 @@
             <br></br>
       <textarea name="reason" rows="4" cols="40" required onblur="checkBlur(this)"></textarea>
     </label><br><br>
-        <button onclick="submit">Submit</button>
+       <button type="submit">Submit</button>
             <script>
                 function submit(){
                 alert("Click");
@@ -141,13 +141,25 @@
             </script>
         <button type="reset">Reset</button>
 
+        <button type ="button" onclick="location.href='viewSignups.html'">View Signups</button>
+
     </form>
 
 <script>
     document.getElementById('dForm').addEventListener('submit', function(event) {
+        event.preventDefault();
         if (!confirm('Are you sure you want to submit?')) {
             event.preventDefault();
         }
+        let signups = JSON.parse(localStorage.getItem('signups')) || [];
+        const formData = new FormData(event.target);
+        const signup = {};
+        for (let [key, value] of formData.entries()) {
+            signup[key] = value;
+        }
+        signups.push(signup);
+        localStorage.setItem('signups', JSON.stringify(signups));
+        alert("Form submitted successfully!");
     });
     document.getElementById('dForm').addEventListener('reset', function(event) {
         if (!confirm('Are you sure you want to reset the form?')) {
@@ -164,6 +176,6 @@
             input.classList.add('valid');
         }
     }
-    
+
 </script>
 </body>

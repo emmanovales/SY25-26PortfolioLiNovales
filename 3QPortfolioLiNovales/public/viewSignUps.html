@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View Sign Ups">
+    <meta name="keywords" content="Club Sign Ups">
+    <meta name="author" content="Emma Novales">
+    <title>View Sign Ups</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="icon" href="/SY25-26PortfolioLiNovales/2QPortfolioLiNovales/assets/catmeme1.webp" sizes="32x32" type="image/png">
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffdcdc;
+        padding: 20px;
+        background-image: url('pinkbg.png');
+    }
+    .table-container {
+        background-color: #fefee6;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: auto;
+    }
+    .title {
+        text-align: center;
+        color: #ac7579;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #6d7eb6;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #fcbad5;
+        color: white;
+    }
+    </style>
+
+<body>
+    <h1 class="title">Show List of Students Who Signed-Up</h1>
+    <div class="table-container">
+        <select id="clubFilter" onchange="filterTable()">
+            <option value="All">All Clubs</option>
+            <option value="music">Music Club</option>
+            <option value="drama">Drama Club</option>
+            <option value="sports">Sports Club</option>
+            <option value="math">Math Club</option>
+            <option value="debate">Debate Club</option>
+        </select>
+        <p>Total Signup: <span id="totalSignups">0</span></p>
+        <table id="signupsTable">
+            <thead>
+                <tr>
+                    <th>Club</th>
+                    <th>Student ID</th>
+                    <th>Full Name</th>
+                    <th>Grade Level</th>
+                    <th>Email</th>
+                    <th>Mobile Number</th>
+                    <th>Intern|Extern</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <br>
+        <button type="button" onclick="location.href='Q3_2GLithiumNovales.html'">Back to Form</button>
+    </div>
+<script>
+    let signups = JSON.parse(localStorage.getItem('signups')) || [];
+    const tableBody = document.querySelector('#signupsTable tbody');
+    const totalSignupsElem = document.getElementById('totalSignups');
+    function renderTable() {
+        tableBody.innerHTML = '';
+        signups.forEach(signup => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${signup.uclub}</td>
+                <td>${signup.studentid}</td>
+                <td>${signup.fullname}</td>
+                <td>${signup.glevel.replace('grade', 'Grade ')}</td>
+                <td>${signup.uemail}</td>
+                <td>${signup.mobile}</td>
+                <td>${signup.internorextern}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+        totalSignupsElem.textContent = signups.length;
+    }
+    function filterTable() {
+        const filterValue = document.getElementById('clubFilter').value;
+        const rows = tableBody.getElementsByTagName('tr');
+        let count = 0;
+        for (let row of rows) {
+            const clubCell = row.getElementsByTagName('td')[0];
+            if (filterValue === 'All' || clubCell.textContent === filterValue) {
+                row.style.display = '';
+                count++;
+            } else {
+                row.style.display = 'none';
+            }
+        }
+        totalSignupsElem.textContent = count;
+    }
+    renderTable();
+    if (signups.length === 0) {
+        tableBody.innerHTML = '<tr><td colspan="7" style="text-align:center;">No Sign-Ups for the club.</td></tr>';
+    }
+</script>
+</body>
+
+
+    </html>
