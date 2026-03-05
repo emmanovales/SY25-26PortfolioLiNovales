@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Q3 2nd Graded Exercise">
+    <meta name="keywords" content="Club Application Form">
+    <meta name="author" content="Emma Novales">
+    <title>HTML Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../styles.css" />
+    <link rel="icon" href="/SY25-26PortfolioLiNovales/2QPortfolioLiNovales/assets/catmeme1.webp" sizes="32x32" type="image/png">
+    <script src="script.js" defer></script>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #ffdcdc;
+        padding: 20px;
+        background-image: url('pinkbg.png');
+    }
+    .form-container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: auto;
+    }
+    .title {
+        text-align: center;
+        color: #000000;
+    }
+    label {
+        display: block;
+        margin-bottom: 10px;
+        color: #000000;
+    }
+    input[type="text"],
+    input[type="numeric"],
+    input[type="date"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #6d7eb6;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button {
+        background-color: #fcbad5;
+        color: rgb(255, 255, 255);
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #bd8096;
+    }
+    .rounded fieldset {
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
+    .valid {
+        border-color: rgb(37, 53, 72);
+        background-color: rgb(192, 227, 235);
+    }
+    .invalid {
+        border-color: rgb(130, 60, 60);
+        background-color: rgb(254, 212, 212);
+    }
+</style>
+</head>
+</html>
+
+<body>
+    <div class="form-container">
+    <h1 class="title">Add a Movie</h1>
+    <form id="dForm" method="get">
+        <fieldset class="rounded">
+        </br>
+            <label><strong>Title:</strong>
+                <input type="numeric" name="studentid" id="studentid" required onblur="checkBlur(this)"/>
+            </label></br>
+            <label><strong>Year:</strong>
+                <input type="text" name="fullname" id="fullname" required onblur="checkBlur(this)"/>
+            </label></br>
+            <label><strong>Genre:</strong>
+                <select name="glevel" id="glevel" required onblur="checkBlur(this)">
+                    <option value="gradeseven">Comedy</option>
+                    <option value="gradeeight">Romance</option>
+                    <option value="gradenine">Action</option>
+                    <option value="gradeten">Horror</option>
+                    <option value="gradeeleven">Sci-fi</option>
+                    <option value="gradetwelve">Thriller</option>
+                </select>
+            </label></br>
+            <label>Intern/Extern : 
+                <input type="radio" name="internorextern" value="Intern" required onblur="checkBlur(this)"/> Intern
+                <input type="radio" name="internorextern" value="Extern" required onblur="checkBlur(this)"/> Extern
+            </label></br>
+            <label>Your Club of Choice : 
+                <select name="uclub" id="uclub" required onblur="checkBlur(this)">
+                    <option value="music">Music</option>
+                    <option value="drama">Drama</option>
+                    <option value="sports">Sports</option>
+                    <option value="math">Math</option>
+                    <option value="debate">Debate</option>
+                </select>
+            </label></br>
+        </fieldset class="rounded">
+    </br>
+        <label>
+            Why do you want to join?
+            <br></br>
+      <textarea name="reason" rows="4" cols="40" required onblur="checkBlur(this)"></textarea>
+    </label><br><br>
+       <button type="submit">Submit</button>
+            <script>
+                function submit(){
+                alert("Click");
+                }
+            </script>
+        <button type="reset">Reset</button>
+
+        <button type ="button" onclick="location.href='viewSignUps.html'">View Signups</button>
+
+    </form>
+
+<script>
+    document.getElementById('dForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (!confirm('Are you sure you want to submit?')) {
+            event.preventDefault();
+        }
+        let signups = JSON.parse(localStorage.getItem('signups')) || [];
+        const formData = new FormData(event.target);
+        const signup = {};
+        for (let [key, value] of formData.entries()) {
+            signup[key] = value;
+        }
+        signups.push(signup);
+        localStorage.setItem('signups', JSON.stringify(signups));
+        alert("Form submitted successfully!");
+    });
+    document.getElementById('dForm').addEventListener('reset', function(event) {
+        if (!confirm('Are you sure you want to reset the form?')) {
+            event.preventDefault();
+        }
+    });
+    function checkBlur(input) {
+        if (input.value.trim() === '') {
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+        }
+        else {
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+        }
+    }
+
+</script>
+</body>
