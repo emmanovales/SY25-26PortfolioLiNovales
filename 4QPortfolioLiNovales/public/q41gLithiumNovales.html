@@ -78,8 +78,19 @@
         background-color: rgb(254, 212, 212);
     }
     .star {
-
+        color: lightgrey;
     }
+    .star-hover {
+        color: yellow;
+    }
+    .star-rating {
+        display:block;
+        font-size: 2rem;
+    }
+    .star.selected {
+        color: yellow;
+    }
+
 </style>
 </head>
 </html>
@@ -108,7 +119,7 @@
             </label></br>
             <label><strong>Rating:</strong>
                 <br>
-                <div class="starating" role="radiogroup" aria-label="Star Rating">
+                <div class="star-rating" role="radiogroup" aria-label="Star Rating">
                 <span class="star" data-value="5" role="radio" aria-label="5stars">★</span>
                 <span class="star" data-value="4" role="radio" aria-label="4stars">★</span>
                 <span class="star" data-value="3" role="radio" aria-label="3stars">★</span>
@@ -123,6 +134,7 @@
                 alert("Click");
                 }
             </script>
+            <h1 class="title">Movie List</h1>
     </form>
 
 <script>
@@ -151,6 +163,9 @@
             input.classList.add('valid');
         }
     }
+
+    const stars = document.querySelectorAll('.star')
+    const output = document.getElementById('rating-output')
 
 </script>
 </body>
