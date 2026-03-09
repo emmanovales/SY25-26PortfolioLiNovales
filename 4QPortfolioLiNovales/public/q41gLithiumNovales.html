@@ -173,7 +173,7 @@
     const stars = document.querySelectorAll('.star')
     const output = document.getElementById('rating')
     stars.forEach(star => {
-        star.addEventListener('click',function(){
+        star.addEventListener('click', function() {
             const value = this.getAttribute('data-value');
             stars.forEach(s => s.classList.remove('selected'));
             stars.forEach(s => {
@@ -204,23 +204,24 @@
     });
 });
 
-function displayMovies(){
-    const movieListDiv = document.getElementById('movie-list');
-    const movies = JSON.parse(localStorage.getItem('movies')) || [];
-    if (movies.length === 0){
-        movieListDiv.innerText = '<p>No movies added yet.</p>';
-        return;
-    }
+function displayMovies() {
+        const movieListDiv = document.getElementById('movie-list');
+        const movies = JSON.parse(localStorage.getItem('movies')) || [];
+        
+        if (movies.length === 0) {
+            movieListDiv.innerHTML = '<p>No movies added yet.</p>';
+            return;
+        }
     let html = '';
     movies.forEach(movie => {
         const rating = parseInt(movie.rating) || 0;
         let starDisplay = '';
         for (let i = 1; i <= 5; i++){
             if (i <= rating){
-                starDisplay += '★';
+                starsDisplay += '★';
             }
             else{
-                starDisplay += '☆';
+                starsDisplay += '☆';
             }
         }
         html += `<div class="movie-item">
