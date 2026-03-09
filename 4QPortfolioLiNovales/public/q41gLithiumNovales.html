@@ -79,16 +79,14 @@
     }
     .star {
         color: lightgrey;
-    }
-    .star-hover {
-        color: yellow;
+        cursor: pointer;
     }
     .star-rating {
         display:block;
         font-size: 2rem;
     }
     .star.selected {
-        color: yellow;
+        color: gold;
     }
 
 </style>
@@ -102,19 +100,19 @@
         
         </br>
             <label><strong>Title:</strong>
-                <input type="numeric" name="studentid" id="studentid" required onblur="checkBlur(this)"/>
+                <input type="text" name="title" id="title" required onblur="checkBlur(this)"/>
             </label></br>
             <label><strong>Year:</strong>
-                <input type="text" name="fullname" id="fullname" required onblur="checkBlur(this)"/>
+                <input type="number" name="Year" id="Year" required onblur="checkBlur(this)"/>
             </label></br>
             <label><strong>Genre:</strong>
-                <select name="glevel" id="glevel" required onblur="checkBlur(this)">
-                    <option value="gradeseven">Comedy</option>
-                    <option value="gradeeight">Romance</option>
-                    <option value="gradenine">Action</option>
-                    <option value="gradeten">Horror</option>
-                    <option value="gradeeleven">Sci-fi</option>
-                    <option value="gradetwelve">Thriller</option>
+                <select name="Genre" id="Genre" required onblur="checkBlur(this)">
+                    <option value="Comedy">Comedy</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Action">Action</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Sci-fi">Sci-fi</option>
+                    <option value="Thriller">Thriller</option>
                 </select>
             </label></br>
             <label><strong>Rating:</strong>
@@ -126,8 +124,7 @@
                 <span class="star" data-value="2" role="radio" aria-label="2stars">★</span>
                 <span class="star" data-value="1" role="radio" aria-label="1star">★</span>
                 </div>
-                
-        </label><br><br>
+                <input type="hidden" name="rating-output" id="rating-output" value="">       </label><br><br>
          <button type="submit">Add Movie</button>
             <script>
                 function submit(){
@@ -143,15 +140,16 @@
         if (!confirm('Are you sure you want to submit?')) {
             event.preventDefault();
         }
-        let signups = JSON.parse(localStorage.getItem('signups')) || [];
-        const formData = new FormData(event.target);
-        const signup = {};
-        for (let [key, value] of formData.entries()) {
-            signup[key] = value;
+        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        const movie = {
+            title: docuent.getElementById('title').value,
+            year: document.getElementById('year').value,
+            genre: document.getElementById('genre').value,
+            rating: ratingInput.value
         }
-        signups.push(signup);
-        localStorage.setItem('signups', JSON.stringify(signups));
-        alert("Form submitted successfully!");
+        movies.push(movie);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        alert("Movie submitted successfully!");
     });
     function checkBlur(input) {
         if (input.value.trim() === '') {
@@ -166,6 +164,26 @@
 
     const stars = document.querySelectorAll('.star')
     const output = document.getElementById('rating-output')
+    stars.forEach(star => {
+        const value = this.getAttribute('data-value');
 
-</script>
+    stars.forEach(s => s.classList.remove('selected'));
+    stars.forEach(s => {
+        if (s.getAttribute('data-value') >= value){
+            s.classList.add('selected');
+        }
+    })
+    ratingInput.value = value;
+    })
+    stars.forEach(s => {
+        if (s.classList.contains('selected')){
+            s.style.color = 'gold';
+        }
+        else{
+            s.style.color = 'lightgray';
+        }
+    })
+
+</script></body>
+
 </body>
