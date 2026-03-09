@@ -49,16 +49,19 @@
     }
 
     button {
-        background-color: #fcbad5;
+        background-color: #65a7fd;
         color: rgb(255, 255, 255);
-        padding: 10px 20px;
-        border: none;
+        padding: 10px;
         border-radius: 5px;
-        cursor: pointer;
+        align-items: center;
+        margin: auto;
+        display: block;
+        width: 500px;
+        border-color: #65a7fd;
     }
 
     button:hover {
-        background-color: #bd8096;
+        background-color: #4c62a8;
     }
     .rounded fieldset {
         border-radius: 20px;
@@ -74,6 +77,9 @@
         border-color: rgb(130, 60, 60);
         background-color: rgb(254, 212, 212);
     }
+    .star {
+
+    }
 </style>
 </head>
 </html>
@@ -82,7 +88,7 @@
     <div class="form-container">
     <h1 class="title">Add a Movie</h1>
     <form id="dForm" method="get">
-        <fieldset class="rounded">
+        
         </br>
             <label><strong>Title:</strong>
                 <input type="numeric" name="studentid" id="studentid" required onblur="checkBlur(this)"/>
@@ -100,36 +106,23 @@
                     <option value="gradetwelve">Thriller</option>
                 </select>
             </label></br>
-            <label>Intern/Extern : 
-                <input type="radio" name="internorextern" value="Intern" required onblur="checkBlur(this)"/> Intern
-                <input type="radio" name="internorextern" value="Extern" required onblur="checkBlur(this)"/> Extern
-            </label></br>
-            <label>Your Club of Choice : 
-                <select name="uclub" id="uclub" required onblur="checkBlur(this)">
-                    <option value="music">Music</option>
-                    <option value="drama">Drama</option>
-                    <option value="sports">Sports</option>
-                    <option value="math">Math</option>
-                    <option value="debate">Debate</option>
-                </select>
-            </label></br>
-        </fieldset class="rounded">
-    </br>
-        <label>
-            Why do you want to join?
-            <br></br>
-      <textarea name="reason" rows="4" cols="40" required onblur="checkBlur(this)"></textarea>
-    </label><br><br>
-       <button type="submit">Submit</button>
+            <label><strong>Rating:</strong>
+                <br>
+                <div class="starating" role="radiogroup" aria-label="Star Rating">
+                <span class="star" data-value="5" role="radio" aria-label="5stars">★</span>
+                <span class="star" data-value="4" role="radio" aria-label="4stars">★</span>
+                <span class="star" data-value="3" role="radio" aria-label="3stars">★</span>
+                <span class="star" data-value="2" role="radio" aria-label="2stars">★</span>
+                <span class="star" data-value="1" role="radio" aria-label="1star">★</span>
+                </div>
+                
+        </label><br><br>
+         <button type="submit">Add Movie</button>
             <script>
                 function submit(){
                 alert("Click");
                 }
             </script>
-        <button type="reset">Reset</button>
-
-        <button type ="button" onclick="location.href='viewSignUps.html'">View Signups</button>
-
     </form>
 
 <script>
@@ -147,11 +140,6 @@
         signups.push(signup);
         localStorage.setItem('signups', JSON.stringify(signups));
         alert("Form submitted successfully!");
-    });
-    document.getElementById('dForm').addEventListener('reset', function(event) {
-        if (!confirm('Are you sure you want to reset the form?')) {
-            event.preventDefault();
-        }
     });
     function checkBlur(input) {
         if (input.value.trim() === '') {
