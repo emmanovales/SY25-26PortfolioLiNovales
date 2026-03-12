@@ -169,7 +169,7 @@
     }
     displayMovies();*/
 
-    const stars = document.querySelectorAll('.star');
+    /*const stars = document.querySelectorAll('.star');
     const ratingInput = document.getElementById('rating');
     stars.forEach(star => {
         star.addEventListener('click', function() {
@@ -267,7 +267,121 @@ const movie = {
             input.classList.add('valid');
         }
     }
+    displayMovies();*/
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+    star.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        stars.forEach(s => s.classList.remove('selected'));
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') >= value) {
+                s.classList.add('selected');
+            }
+        });
+        ratingInput.value = value;
+    });
+
+    star.addEventListener('mouseenter', function() {
+        const value = this.getAttribute('data-value');
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') >= value) {
+                s.style.color = 'gold';
+            }
+        });
+    });
+
+    star.addEventListener('mouseleave', function() {
+        stars.forEach(s => {
+            if (s.classList.contains('selected')) {
+                s.style.color = 'gold';
+            } 
+            else {
+                s.style.color = 'lightgrey';
+            }
+        });
+    });
+});
+
+function displayMovies() {
+    const movieListDiv = document.getElementById('movie-list');
+    const movies = JSON.parse(localStorage.getItem('movies')) || [];
+    
+    if (movies.length === 0) {
+        movieListDiv.innerHTML = '<p>No movies added yet.</p>';
+        return;
+    }
+    
+    let html = '';
+    movies.forEach(movie => {
+        const rating = parseInt(movie.rating) || 0;
+        let starsDisplay = '';
+        
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                starsDisplay += '★';
+            } 
+            else {
+                starsDisplay += '☆';
+            }
+        }
+        
+        html += `<div class="movie-item">
+                ${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${starsDisplay}
+                </div>`;
+    });
+    movieListDiv.innerHTML = html;
+}
+
+document.getElementById('dForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    if (!confirm('Are you sure you want to submit?')) {
+        return;
+    }
+    
+    if (!ratingInput.value) {
+        alert('Please select a rating!');
+        return;
+    }
+    
+    let movies = JSON.parse(localStorage.getItem('movies')) || [];
+    const movie = {
+        title: document.getElementById('title').value,
+        year: document.getElementById('year').value,
+        genre: document.getElementById('genre').value,
+        rating: ratingInput.value
+    };
+    
+    movies.push(movie);
+    localStorage.setItem('movies', JSON.stringify(movies));
+    
+    alert("Movie submitted successfully!");
+    
+    this.reset();
+    stars.forEach(s => s.classList.remove('selected'));
+    ratingInput.value = '';
+    
+    document.querySelectorAll('input, select').forEach(field => {
+        field.classList.remove('valid', 'invalid');
+    });
+    
     displayMovies();
+});
+
+function checkBlur(input) {
+    if (input.value.trim() === '') {
+        input.classList.remove('valid');
+        input.classList.add('invalid');
+    } 
+    else {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+    }
+}
+
+displayMovies();
 
 </script></body>
 
