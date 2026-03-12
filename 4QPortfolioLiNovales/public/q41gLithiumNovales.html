@@ -97,7 +97,6 @@
 
 </style>
 </head>
-</html>
 
 <body>
     <div class="form-container">
@@ -215,7 +214,7 @@ function displayMovies() {
     let html = '';
     movies.forEach(movie => {
         const rating = parseInt(movie.rating) || 0;
-        let starDisplay = '';
+        let starsDisplay = '';
         for (let i = 1; i <= 5; i++){
             if (i <= rating){
                 starsDisplay += '★';
@@ -273,3 +272,4 @@ const movie = {
 </script></body>
 
 </body>
+</html>
