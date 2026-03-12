@@ -2,7 +2,7 @@
 <html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Q3 2nd Graded Exercise">
+    <meta name="description" content="Q4 1st Graded Exercise">
     <meta name="keywords" content="Club Application Form">
     <meta name="author" content="Emma Novales">
     <title>HTML Form</title>
@@ -170,8 +170,8 @@
     }
     displayMovies();*/
 
-    const stars = document.querySelectorAll('.star')
-    const output = document.getElementById('rating')
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
     stars.forEach(star => {
         star.addEventListener('click', function() {
             const value = this.getAttribute('data-value');
@@ -191,7 +191,8 @@
             s.style.color = 'gold';
         }
     });
-    star.addEventListener('mouseleave', function(){
+});
+    star.addEventListener('mouseleave', function() {
         stars.forEach(s => {
             if (s.classList.contains('selected')){
                 s.style.color = 'gold';
@@ -201,7 +202,6 @@
             }
         })
     })
-    });
 });
 
 function displayMovies() {
@@ -262,7 +262,8 @@ const movie = {
         if (input.value.trim() === '') {
             input.classList.remove('valid');
             input.classList.add('invalid');
-        } else {
+        } 
+        else {
             input.classList.remove('invalid');
             input.classList.add('valid');
         }
