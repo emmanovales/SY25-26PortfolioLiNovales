@@ -94,6 +94,45 @@
         background-color: #ffffff;
         border-radius: 10px;
     }
+    .movie-item {
+        padding: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            border-radius: 5px;
+    }
+    .delete-btn {
+        background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+            width: auto;
+            display: inline-block;
+            font-size: 14px;
+    }
+    .delete-btn:hover {
+            background-color: #cc0000;
+    }
+    .edit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        width: auto;
+        display: inline-block;
+        font-size: 14px;
+    }
+    .edit-btn:hover {
+            background-color: #45a049;
+    }
+    .button-group {
+        margin-top: 10px;
+    }
 
 </style>
 </head>
@@ -333,6 +372,34 @@ function displayMovies() {
     });
     movieListDiv.innerHTML = html;
 }
+function deleteMovie(index){
+    if (confirm('Are you sure you want to delete?')){
+        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        movies.splice(index, 1);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        displayMovies();
+        alert('Movie deleted successfully!');
+    }
+}
+
+function editMovie(index) {
+    let movies = JSON.parse(localStorage.getItem('movies')) || [];
+    const movie = movies[index];
+    document.getElementById('title').value = movie.title;
+    document.getElementById('year').value = movie.year;
+    document.getElementById('genre').value = movie.genre
+    const rating = parseInt(movie.rating) || 0;
+    stars.forEach(s => s.classList.remove('selected'));
+    stars.forEach(s => {
+        if (s.getAttribute('data-value') >= rating) {
+            s.classList.add('selected');
+        }
+    });
+    ratingInput.value = rating;
+    const submitBtn = document.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Update Movie';
+    isUpdateMode = index;
+}
 
 document.getElementById('dForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -353,11 +420,53 @@ document.getElementById('dForm').addEventListener('submit', function(event) {
         genre: document.getElementById('genre').value,
         rating: ratingInput.value
     };
-    
-    movies.push(movie);
+    if (isUpdateMode !== false) {
+        const existingMovie = movies[isUpdateMode];
+        const oldRating = parseInt(existingMovie.rating) || 0;
+        const newRating = parseInt(rating) || 0;
+        const averageRating = Math.round((oldRating + newRating) / 2);
+        movies[isUpdateMode] = {
+            title: title,
+            year: year,
+            genre: genre,
+            rating: averageRating.toString()
+        };
+        
+        alert(`Movie updated! New average rating: ${averageRating} stars`);
+        isUpdateMode = false;
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Add Movie';
+    } 
+    else {const existingIndex = movies.findIndex(m => 
+            m.title.toLowerCase() === title.toLowerCase()
+        );
+        
+        if (existingIndex !== -1) {
+            const existingMovie = movies[existingIndex];
+            const oldRating = parseInt(existingMovie.rating) || 0;
+            const newRating = parseInt(rating) || 0;
+            const averageRating = Math.round((oldRating + newRating) / 2);
+            movies[existingIndex] = {
+                title: title,
+                year: year,
+                genre: genre,
+                rating: averageRating.toString()
+            };
+            
+            alert(`Movie title already exists! Updated with new information. Average rating: ${averageRating} stars`);
+        } 
+        else {
+            const movie = {
+                title: title,
+                year: year,
+                genre: genre,
+                rating: rating
+            };
+            movies.push(movie);
+            alert("New movie added successfully!");
+        }
+    }
     localStorage.setItem('movies', JSON.stringify(movies));
-    
-    alert("Movie submitted successfully!");
     
     this.reset();
     stars.forEach(s => s.classList.remove('selected'));
