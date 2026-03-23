@@ -2,7 +2,7 @@
 <html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Q3 2nd Graded Exercise">
+    <meta name="description" content="Q4 1st Graded Exercise">
     <meta name="keywords" content="Club Application Form">
     <meta name="author" content="Emma Novales">
     <title>HTML Form</title>
@@ -35,7 +35,7 @@
         color: #000000;
     }
     input[type="text"],
-    input[type="numeric"],
+    input[type="number"],
     input[type="date"],
     input[type="email"],
     input[type="tel"],
@@ -79,21 +79,63 @@
     }
     .star {
         color: lightgrey;
-    }
-    .star-hover {
-        color: yellow;
+        cursor: pointer;
     }
     .star-rating {
         display:block;
         font-size: 2rem;
     }
     .star.selected {
-        color: yellow;
+        color: gold;
+    }
+    .movie-list {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+    }
+    .movie-item {
+        padding: 15px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            background-color: white;
+            border-radius: 5px;
+    }
+    .delete-btn {
+        background-color: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 10px;
+            width: auto;
+            display: inline-block;
+            font-size: 14px;
+    }
+    .delete-btn:hover {
+            background-color: #cc0000;
+    }
+    .edit-btn {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        width: auto;
+        display: inline-block;
+        font-size: 14px;
+    }
+    .edit-btn:hover {
+            background-color: #45a049;
+    }
+    .button-group {
+        margin-top: 10px;
     }
 
 </style>
 </head>
-</html>
 
 <body>
     <div class="form-container">
@@ -102,19 +144,19 @@
         
         </br>
             <label><strong>Title:</strong>
-                <input type="numeric" name="studentid" id="studentid" required onblur="checkBlur(this)"/>
+                <input type="text" name="title" id="title" required onblur="checkBlur(this)"/>
             </label></br>
             <label><strong>Year:</strong>
-                <input type="text" name="fullname" id="fullname" required onblur="checkBlur(this)"/>
+                <input type="number" name="year" id="year" required onblur="checkBlur(this)"/>
             </label></br>
             <label><strong>Genre:</strong>
-                <select name="glevel" id="glevel" required onblur="checkBlur(this)">
-                    <option value="gradeseven">Comedy</option>
-                    <option value="gradeeight">Romance</option>
-                    <option value="gradenine">Action</option>
-                    <option value="gradeten">Horror</option>
-                    <option value="gradeeleven">Sci-fi</option>
-                    <option value="gradetwelve">Thriller</option>
+                <select name="genre" id="genre" required onblur="checkBlur(this)">
+                    <option value="Comedy">Comedy</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Action">Action</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Sci-fi">Sci-fi</option>
+                    <option value="Thriller">Thriller</option>
                 </select>
             </label></br>
             <label><strong>Rating:</strong>
@@ -126,8 +168,7 @@
                 <span class="star" data-value="2" role="radio" aria-label="2stars">★</span>
                 <span class="star" data-value="1" role="radio" aria-label="1star">★</span>
                 </div>
-                
-        </label><br><br>
+                <input type="hidden" name="rating" id="rating" value="">       </label><br><br>
          <button type="submit">Add Movie</button>
             <script>
                 function submit(){
@@ -135,23 +176,25 @@
                 }
             </script>
             <h1 class="title">Movie List</h1>
+            <div id="movie-list" class="movie-list"></div>
     </form>
 
 <script>
-    document.getElementById('dForm').addEventListener('submit', function(event) {
+    /*document.getElementById('dForm').addEventListener('submit', function(event) {
         event.preventDefault();
         if (!confirm('Are you sure you want to submit?')) {
             event.preventDefault();
         }
-        let signups = JSON.parse(localStorage.getItem('signups')) || [];
-        const formData = new FormData(event.target);
-        const signup = {};
-        for (let [key, value] of formData.entries()) {
-            signup[key] = value;
+        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        const movie = {
+            title: document.getElementById('title').value,
+            year: document.getElementById('year').value,
+            genre: document.getElementById('genre').value,
+            rating: ratingInput.value
         }
-        signups.push(signup);
-        localStorage.setItem('signups', JSON.stringify(signups));
-        alert("Form submitted successfully!");
+        movies.push(movie);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        alert("Movie submitted successfully!");
     });
     function checkBlur(input) {
         if (input.value.trim() === '') {
@@ -163,9 +206,293 @@
             input.classList.add('valid');
         }
     }
+    displayMovies();*/
 
-    const stars = document.querySelectorAll('.star')
-    const output = document.getElementById('rating-output')
+    /*const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const value = this.getAttribute('data-value');
+            stars.forEach(s => s.classList.remove('selected'));
+            stars.forEach(s => {
+                if (s.getAttribute('data-value') >= value){
+                    s.classList.add('selected');
+        }
+    });
 
-</script>
+    ratingInput.value = value;
+    });
+    stars.addEventListener('mouseenter', function(){
+        const value = this.getAttribute('data-value');
+        stars.forEach(s => {
+        if (s.getAttribute('data-value') >= value){
+            s.style.color = 'gold';
+        }
+    });
+});
+    star.addEventListener('mouseleave', function() {
+        stars.forEach(s => {
+            if (s.classList.contains('selected')){
+                s.style.color = 'gold';
+            }
+            else{
+                s.style.color = 'lightgray';
+            }
+        })
+    })
+});
+
+function displayMovies() {
+        const movieListDiv = document.getElementById('movie-list');
+        const movies = JSON.parse(localStorage.getItem('movies')) || [];
+        
+        if (movies.length === 0) {
+            movieListDiv.innerHTML = '<p>No movies added yet.</p>';
+            return;
+        }
+    let html = '';
+    movies.forEach(movie => {
+        const rating = parseInt(movie.rating) || 0;
+        let starsDisplay = '';
+        for (let i = 1; i <= 5; i++){
+            if (i <= rating){
+                starsDisplay += '★';
+            }
+            else{
+                starsDisplay += '☆';
+            }
+        }
+        html += `<div class="movie-item">
+                ${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${starsDisplay}
+                </div>`;
+    });
+    movieListDiv.innerHTML = html;
+}
+document.getElementById('dForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        if (!confirm('Are you sure you want to submit?')) {
+            return;
+        }
+        if (!ratingInput.value) {
+            alert('Please select a rating!');
+            return;
+        }
+let movies = JSON.parse(localStorage.getItem('movies')) || [];
+const movie = {
+            title: document.getElementById('title').value,
+            year: document.getElementById('year').value,
+            genre: document.getElementById('genre').value,
+            rating: ratingInput.value
+        };
+        movies.push(movie);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        
+        alert("Movie submitted successfully!");
+        this.reset();
+        stars.forEach(s => s.classList.remove('selected'));
+        ratingInput.value = '';
+        document.querySelectorAll('input, select').forEach(field => {
+            field.classList.remove('valid', 'invalid');
+        });
+        displayMovies();
+    });
+    function checkBlur(input) {
+        if (input.value.trim() === '') {
+            input.classList.remove('valid');
+            input.classList.add('invalid');
+        } 
+        else {
+            input.classList.remove('invalid');
+            input.classList.add('valid');
+        }
+    }
+    displayMovies();*/
+    const stars = document.querySelectorAll('.star');
+    const ratingInput = document.getElementById('rating');
+
+    stars.forEach(star => {
+    star.addEventListener('click', function() {
+        const value = this.getAttribute('data-value');
+        stars.forEach(s => s.classList.remove('selected'));
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') >= value) {
+                s.classList.add('selected');
+            }
+        });
+        ratingInput.value = value;
+    });
+
+    star.addEventListener('mouseenter', function() {
+        const value = this.getAttribute('data-value');
+        stars.forEach(s => {
+            if (s.getAttribute('data-value') >= value) {
+                s.style.color = 'gold';
+            }
+        });
+    });
+
+    star.addEventListener('mouseleave', function() {
+        stars.forEach(s => {
+            if (s.classList.contains('selected')) {
+                s.style.color = 'gold';
+            } 
+            else {
+                s.style.color = 'lightgrey';
+            }
+        });
+    });
+});
+
+function displayMovies() {
+    const movieListDiv = document.getElementById('movie-list');
+    const movies = JSON.parse(localStorage.getItem('movies')) || [];
+    
+    if (movies.length === 0) {
+        movieListDiv.innerHTML = '<p>No movies added yet.</p>';
+        return;
+    }
+    
+    let html = '';
+    movies.forEach(movie => {
+        const rating = parseInt(movie.rating) || 0;
+        let starsDisplay = '';
+        
+        for (let i = 1; i <= 5; i++) {
+            if (i <= rating) {
+                starsDisplay += '★';
+            } 
+            else {
+                starsDisplay += '☆';
+            }
+        }
+        
+        html += `<div class="movie-item">
+                ${movie.title} (${movie.year}) - ${movie.genre}, Rating: ${starsDisplay}
+                </div>`;
+    });
+    movieListDiv.innerHTML = html;
+}
+function deleteMovie(index){
+    if (confirm('Are you sure you want to delete?')){
+        let movies = JSON.parse(localStorage.getItem('movies')) || [];
+        movies.splice(index, 1);
+        localStorage.setItem('movies', JSON.stringify(movies));
+        displayMovies();
+        alert('Movie deleted successfully!');
+    }
+}
+
+function editMovie(index) {
+    let movies = JSON.parse(localStorage.getItem('movies')) || [];
+    const movie = movies[index];
+    document.getElementById('title').value = movie.title;
+    document.getElementById('year').value = movie.year;
+    document.getElementById('genre').value = movie.genre
+    const rating = parseInt(movie.rating) || 0;
+    stars.forEach(s => s.classList.remove('selected'));
+    stars.forEach(s => {
+        if (s.getAttribute('data-value') >= rating) {
+            s.classList.add('selected');
+        }
+    });
+    ratingInput.value = rating;
+    const submitBtn = document.querySelector('button[type="submit"]');
+    submitBtn.textContent = 'Update Movie';
+    isUpdateMode = index;
+}
+
+document.getElementById('dForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    if (!confirm('Are you sure you want to submit?')) {
+        return;
+    }
+    
+    if (!ratingInput.value) {
+        alert('Please select a rating!');
+        return;
+    }
+    
+    let movies = JSON.parse(localStorage.getItem('movies')) || [];
+    const movie = {
+        title: document.getElementById('title').value,
+        year: document.getElementById('year').value,
+        genre: document.getElementById('genre').value,
+        rating: ratingInput.value
+    };
+    if (isUpdateMode !== false) {
+        const existingMovie = movies[isUpdateMode];
+        const oldRating = parseInt(existingMovie.rating) || 0;
+        const newRating = parseInt(rating) || 0;
+        const averageRating = Math.round((oldRating + newRating) / 2);
+        movies[isUpdateMode] = {
+            title: title,
+            year: year,
+            genre: genre,
+            rating: averageRating.toString()
+        };
+        
+        alert(`Movie updated! New average rating: ${averageRating} stars`);
+        isUpdateMode = false;
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.textContent = 'Add Movie';
+    } 
+    else {const existingIndex = movies.findIndex(m => 
+            m.title.toLowerCase() === title.toLowerCase()
+        );
+        
+        if (existingIndex !== -1) {
+            const existingMovie = movies[existingIndex];
+            const oldRating = parseInt(existingMovie.rating) || 0;
+            const newRating = parseInt(rating) || 0;
+            const averageRating = Math.round((oldRating + newRating) / 2);
+            movies[existingIndex] = {
+                title: title,
+                year: year,
+                genre: genre,
+                rating: averageRating.toString()
+            };
+            
+            alert(`Movie title already exists! Updated with new information. Average rating: ${averageRating} stars`);
+        } 
+        else {
+            const movie = {
+                title: title,
+                year: year,
+                genre: genre,
+                rating: rating
+            };
+            movies.push(movie);
+            alert("New movie added successfully!");
+        }
+    }
+    localStorage.setItem('movies', JSON.stringify(movies));
+    
+    this.reset();
+    stars.forEach(s => s.classList.remove('selected'));
+    ratingInput.value = '';
+    
+    document.querySelectorAll('input, select').forEach(field => {
+        field.classList.remove('valid', 'invalid');
+    });
+    
+    displayMovies();
+});
+
+function checkBlur(input) {
+    if (input.value.trim() === '') {
+        input.classList.remove('valid');
+        input.classList.add('invalid');
+    } 
+    else {
+        input.classList.remove('invalid');
+        input.classList.add('valid');
+    }
+}
+
+displayMovies();
+
+</script></body>
+
 </body>
+</html>
