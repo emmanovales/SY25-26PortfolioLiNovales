@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="author" content="<NOVALES, Emma Tianlan Z.>" />
+  <meta name="revised" content="<March 26, 2026>" />
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .header, .footer {
+      background: lightblue;
+      padding: 10px;
+    }
+    .footer {
+      position: fixed; 
+      bottom: 0; 
+      width: 100%;
+      opacity: 0.5;
+    }
+    .sidebar {
+      position: relative; 
+      /*top: 100px; 
+      left: 100px;*/
+      bottom: 0px;
+      right: 5px;
+      background: lightgreen;
+      width: 150px;
+      height: 200px;
+    }
+    .content {
+      position: fixed; 
+      top: 66px; 
+      left: 200px;
+      background: lightyellow;
+      width: 300px;
+      height: 200px;
+      z-index: 1;
+    }    
+    .notice {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: orange;
+    padding: 10px;
+    z-index: 2;
+}
+  </style>
+</head>
+<body>
+
+  <div class="header">Header</div>
+  <div class="sidebar">Sidebar</div>
+  <div class="content">Main Content
+    <div class="notice">Notice!</div>
+  </div>
+  <div class="footer">Footer</div>
+</body>
+
+</html>
