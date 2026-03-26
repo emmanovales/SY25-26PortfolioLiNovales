@@ -107,8 +107,9 @@
     - Static keeps the element in its default position, relative moves the element relative to its normal position, absolute makes the element relative to its nearest positioned ancestor, while fixed fixes the element relative to the viewport.
 
     b. How does absolute positioning depend on its parent element?
-    - 
+    - The element situated within its parent element moves along with its parent element.
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+    - Fixed moves relative with the viewport. Sticky can do the same thing, however it has a certain threshold where it stays fixed once reached.
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
