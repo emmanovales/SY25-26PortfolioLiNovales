@@ -112,4 +112,4 @@
     c. How do you differentiate sticky from fixed (you can research on sticky)?
     - Fixed moves relative with the viewport. Sticky can do the same thing, however it has a certain threshold where it stays fixed once reached.
 
-    d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.  
+    d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.     - I would personally use positioning to make aure the important information are placed in vet obvious places, so that the viewerr can easily spot them compared to the less important details. This could be implemented by using absolute to z-index to make sure nothing blocks the info, and also using the fixed position so that it can constantly be seen.
