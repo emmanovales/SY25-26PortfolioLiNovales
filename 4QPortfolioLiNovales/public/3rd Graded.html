@@ -211,8 +211,8 @@ th, td, tr{
     <hr>
   </section>
   <script>
-    function plotPoint() {
-    console.log(x0, y0, x, y) // checks the arguments passed to this function
+    function plotPoint(divX, divY, pointX, pointY) {
+    console.log(divX, divY, pointX, pointY) // checks the arguments passed to this function
     in1.innerHTML = x0 + " " + y0 + " " + x + " " + y;
     var point = document.createElement('div');  
     point.className = 'point';
